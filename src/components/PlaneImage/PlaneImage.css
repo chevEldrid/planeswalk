@@ -1,0 +1,21 @@
+#Plane-image {
+  height: 65%;
+  width: 65%;
+  transform:  rotate(90deg) translateX(-25%) translateY(20%);
+  margin: 0 0 0 0;
+}
+
+#Plane-image-imgur {
+  height: 70%;
+  width: 70%;
+  margin: 0 0 0 0;
+}
+
+.rotation-correction {
+  transform: translateY(-100px);
+}
+
+.minimized {
+  height: 35%;
+  width: 35%;
+}
