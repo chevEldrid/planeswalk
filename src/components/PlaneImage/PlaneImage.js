@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './PlaneImage.css';
-import get_scryfall from '../../utils/api';
-import shuffle from '../../utils/utility';
 import { observer } from 'mobx-react';
 
 @observer
-class PlaneImage extends React.Component {
+class PlaneImage extends Component {
+    static propTypes = {
+        cardStore: PropTypes.object.isRequired
+    }
 
     constructor(props) {
         super(props);
@@ -13,24 +15,22 @@ class PlaneImage extends React.Component {
         this.state = {
             isLoaded: false,
             error: false,
-            index: 0,
-            imageID: 'Plane-Image',
-            curImageSrc: ''
+            imageID: 'Plane-Image'
         }
     }
 
     async componentDidMount() {
-        try {
-            //const deck = await get_scryfall();
-            let deck = {};
-            deck = shuffle(deck);
-            //const imgUri = deck[0].image_uris.normal;
-            const imgUri = "https://img.scryfall.com/cards/normal/front/e/d/ed4f4210-9871-4cec-9b46-100c80f93cd4.jpg?1547432274";
-            this.setState({ cards: deck, isLoaded: true, curImageSrc: imgUri });
-        } catch(error) {
-            this.setState({ isLoaded: true, error: true });
-        }
+        await this.updateCards();
     }
+
+    async updateCards() {
+        const { isEmpty } = this.props.cardStore;
+        if(isEmpty) {
+            console.log('thought it was empty!');
+            await this.props.cardStore.fetchCardsFromScryfall();
+        }
+        this.setState({ isLoaded: true });
+     }
 
     render() {
         const  { curImageSrc, isLoaded, error }=this.state;
@@ -49,7 +49,7 @@ class PlaneImage extends React.Component {
         return (
             <div>
                 <p>Successfully added element!</p>
-                <img alt="Plane" src={curImageSrc} align="right" className="img-fluid mx-auto d-block" id="Plane-image" />
+                <img alt="Plane" src={this.props.cardStore.getCardImgUrl()} align="right" className="img-fluid mx-auto d-block" id="Plane-image" />
             </div>
         )
     }
@@ -59,3 +59,5 @@ PlaneImage.defaultProps = {
     qs: 'Invalid',
     host: 'Scryfall'
 }
+
+export default PlaneImage;

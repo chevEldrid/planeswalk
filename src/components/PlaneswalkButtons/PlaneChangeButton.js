@@ -1,0 +1,40 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
+
+@observer
+class PlaneChangeButton extends Component {
+  static propTypes = {
+    direction: PropTypes.bool.isRequired,
+    cardStore: PropTypes.object.isRequired,
+    message: PropTypes.string.isRequired
+  }
+
+  constructor(props) {
+    super(props)
+
+    this.changePlane = this.changePlane.bind(this);
+  }
+
+  changePlane() {
+    const { curIndex } = this.props.cardStore
+    if(this.props.direction) {
+      this.props.cardStore.nextPlane();
+    } else {
+      this.props.cardStore.prevPlane();
+    }
+    
+  }
+
+  render() {
+    return (
+      <button
+        onClick = {this.changePlane}
+      >
+        {this.props.message}
+      </button>
+    )
+  }
+}
+
+export default PlaneChangeButton;
