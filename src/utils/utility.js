@@ -1,4 +1,4 @@
-export default function shuffle(array) {
+export function shuffle(array) {
   let currentIndex = array.length;
   let temporaryValue;
   let randomIndex;
@@ -13,4 +13,8 @@ export default function shuffle(array) {
     array[randomIndex] = temporaryValue;
   }
   return array;
+}
+
+export function filterCards(cards, toRemove) {
+  return cards.filter((card, index) => !toRemove.includes(index));
 }

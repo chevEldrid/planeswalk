@@ -17,7 +17,6 @@ class PlaneChangeButton extends Component {
   }
 
   changePlane() {
-    const { curIndex } = this.props.cardStore
     if(this.props.direction) {
       this.props.cardStore.nextPlane();
     } else {

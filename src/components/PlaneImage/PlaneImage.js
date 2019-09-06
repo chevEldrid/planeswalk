@@ -14,9 +14,9 @@ class PlaneImage extends Component {
 
         this.state = {
             isLoaded: false,
-            error: false,
-            imageID: 'Plane-Image'
+            error: false
         }
+        this.updateCards = this.updateCards.bind(this);
     }
 
     async componentDidMount() {
@@ -24,16 +24,13 @@ class PlaneImage extends Component {
     }
 
     async updateCards() {
-        const { isEmpty } = this.props.cardStore;
-        if(isEmpty) {
-            console.log('thought it was empty!');
-            await this.props.cardStore.fetchCardsFromScryfall();
-        }
+        await this.props.cardStore.fetchCardsFromScryfall();
         this.setState({ isLoaded: true });
-     }
+    }
 
     render() {
-        const  { curImageSrc, isLoaded, error }=this.state;
+        const { isOfficial }=this.props.cardStore;
+        const  { isLoaded, error }=this.state;
         if (!isLoaded) {
             return (
                 <div>Loading...</div>
@@ -48,16 +45,16 @@ class PlaneImage extends Component {
 
         return (
             <div>
-                <p>Successfully added element!</p>
-                <img alt="Plane" src={this.props.cardStore.getCardImgUrl()} align="right" className="img-fluid mx-auto d-block" id="Plane-image" />
+                <img 
+                    alt="Plane" 
+                    src={this.props.cardStore.getCardImgUrl()} 
+                    align="right" 
+                    className="img-fluid mx-auto d-block" 
+                    id={isOfficial ? "Plane-image" : "Plane-image-imgur"}
+                />
             </div>
         )
     }
-}
-
-PlaneImage.defaultProps = {
-    qs: 'Invalid',
-    host: 'Scryfall'
 }
 
 export default PlaneImage;

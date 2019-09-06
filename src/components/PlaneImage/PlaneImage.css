@@ -1,7 +1,7 @@
 #Plane-image {
   height: 65%;
   width: 65%;
-  transform:  rotate(90deg) translateX(-25%) translateY(20%);
+  transform:  rotate(90deg) translateX(-5%) translateY(20%);
   margin: 0 0 0 0;
 }
 
