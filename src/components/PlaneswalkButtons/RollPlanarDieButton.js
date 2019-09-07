@@ -33,7 +33,9 @@ class RollPlanarDieButton extends Component {
   render() {
     return (
       <button
+        type='button'
         onClick = {this.rollDie}
+        className = 'btn btn-primary'
       >
         Roll Die
       </button>

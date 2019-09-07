@@ -20,7 +20,9 @@ class PlaneSourceToggleButton extends Component {
   render() {
     return (
       <button
+        type='button'
         onClick = {this.toggleSource}
+        className = 'btn btn-primary'
       >
         Switch Source
       </button>

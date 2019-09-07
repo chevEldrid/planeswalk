@@ -27,8 +27,10 @@ class PlaneChangeButton extends Component {
 
   render() {
     return (
-      <button
+      <button 
+        type='button'
         onClick = {this.changePlane}
+        className = 'btn btn-primary'
       >
         {this.props.message}
       </button>
