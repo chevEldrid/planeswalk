@@ -68,7 +68,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha --require @babel/register"
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --require @babel/register",
+    "deploy": "aws s3 sync build/ s3://planeswalk-app.com --acl public-read"
   },
   "eslintConfig": {
     "extends": "react-app"
