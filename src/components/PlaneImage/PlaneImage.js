@@ -13,7 +13,6 @@ class PlaneImage extends Component {
         super(props);
 
         this.state = {
-            isLoaded: false,
             error: false
         }
         this.updateCards = this.updateCards.bind(this);
@@ -25,13 +24,12 @@ class PlaneImage extends Component {
 
     async updateCards() {
         await this.props.cardStore.fetchCardsFromScryfall();
-        this.setState({ isLoaded: true });
     }
 
     render() {
-        const { isOfficial }=this.props.cardStore;
-        const  { isLoaded, error }=this.state;
-        if (!isLoaded) {
+        const { isOfficial, isLoading }=this.props.cardStore;
+        const  { error }=this.state;
+        if (isLoading) {
             return (
                 <div>Loading...</div>
             );
